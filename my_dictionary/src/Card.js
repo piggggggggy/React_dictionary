@@ -24,10 +24,10 @@ const Card = (props) => {
 						<Example>{list.example}</Example>
 						<BtnGroup>
 							<IconButton onClick={() => {window.alert("기능구현을 위해 후원을 부탁드려요! \n 신한은행 110-308-391020 박용태")}}>
-								<EditIcon fontSize="small" style={{color: "#7c4dff"}}/>
+								<EditIcon fontSize="small"/>
 							</IconButton>
 							<IconButton onClick={() => {dispatch(deleteDictFB(index))}}>
-								<DeleteOutlinedIcon fontSize="small" style={{color: "#7c4dff"}}/>
+								<DeleteOutlinedIcon fontSize="small"/>
 							</IconButton>
 						</BtnGroup>
 					</CardBox>
@@ -84,6 +84,12 @@ const CardBox = styled.div`
 	}
 	&:hover span {
 		font-size: 20px;
+		color: #fff;
+	}
+	& svg {
+		color: #7c4dff;
+	}
+	&:hover svg {
 		color: #fff;
 	}
 

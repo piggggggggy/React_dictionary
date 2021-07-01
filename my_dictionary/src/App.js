@@ -54,11 +54,12 @@ class App extends React.Component {
             <Route path="/create" exact component={Create}/>
             {/* <Route component={NotFound}/> */}
           </Switch>
+          
           <CreateBtn onClick={() => {this.props.history.push('/create')}}>
             <AddCircleIcon style={{fontSize:"45px", color:"#7c4dff"}}/>
           </CreateBtn>
+
         </MainOutter>
-        
       </div>
     )
   };
@@ -89,7 +90,7 @@ const CreateBtn = styled.div`
   top: 30%;
   transition: all ease 1s;
 
-  $:hover div svg {
+  $:hover svg {
     transform: rotate( 90deg );
   }
 `
