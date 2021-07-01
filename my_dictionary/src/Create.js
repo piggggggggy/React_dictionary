@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { createDictFB } from "./redux/modules/dict";
 
+
 const Create = (props) => {
 	const dispatch = useDispatch();
 
@@ -15,7 +16,6 @@ const Create = (props) => {
 	const addDict = () => {
 		const dict = {word: wordinput.current.value, pronounce: pronounceinput.current.value, discription: discriptioninput.current.value, example: exampleinput.current.value, completed: false};
 		console.log(dict);
-
 		dispatch(createDictFB(dict));
 		props.history.goBack();
 	}
@@ -42,6 +42,7 @@ const Create = (props) => {
 				</Box>
 			</Items>
 			<SaveBtn onClick={addDict} >추가하기</SaveBtn>
+
     </CreateContainer>
 	);
 }
@@ -50,22 +51,29 @@ const CreateContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	border: 1px dotted purple;
+	border-radius: 10px;
+	width: 400px;
+	height: 600px;
+	
 `
-const MiniTitle = styled.div`
+const MiniTitle = styled.h2`
 
 `
 const Items = styled.div`
-
+	width: 350px;
+	height: 400px;
 `
 const Box = styled.div`
-	width: 350px;
-	height: 500px;
+	height: 100px;
 `
 const Item = styled.div`
 
 `
 const Input = styled.input`
 	width: 350px;
+	padding: 5px 0px 5px 0px;
+	margin-top: 5px;
 `
 const SaveBtn = styled.button`
 

@@ -12,7 +12,7 @@ const dict_db = firestore.collection("dict");
 // Actions
 const LOAD = "dict/LOAD"
 const CREATE = "dict/CREATE"
-// const DELETE = "dict/DELETE"
+const DELETE = "dict/DELETE"
 // const EDIT = "dict/EDIT"
 // const LOADED = "dict/LOADED"
 
@@ -38,9 +38,9 @@ export const createDict = (dict) => {
     return {type: CREATE, dict};
 };
 
-// export const deleteDict = (dict) => {
-//     return {type: DELETE, dict};
-// };
+export const deleteDict = (dict) => {
+    return {type: DELETE, dict};
+};
 
 // export const editDict = (dict) => {
 //     return {type: EDIT, dict};
@@ -69,7 +69,7 @@ export const loadDictFB = () => {
     };
 };
 // create
-export const createDictFB =  (dict) => {
+export const createDictFB = (dict) => {
     return function (dispatch) {
         let dict_data = {word: dict.word, pronounce: dict.pronounce, discription: dict.discription, example: dict.example, completed: false};
         console.log(dict_data);
@@ -82,11 +82,28 @@ export const createDictFB =  (dict) => {
     };
 };
 
+//delete
+export const deleteDictFB = (dict) => {
+    return function (dispatch, getState) {
+        const dict_data = getState().dict.list[dict];
+        console.log(dict_data);
+
+        if(!dict_data.id){
+            return;
+        };
+
+        dict_db.doc(dict_data.id).delete().then(docRef => {
+            dispatch(deleteDict(dict));
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+};
 
 // edit
 
 
-//delete
+
 
 
 
@@ -108,6 +125,13 @@ export default function reducer(state = initialState, action ={}) {
             console.log(new_dict_list);
             return { list: new_dict_list };
             
+        case "dict/DELETE":
+            const delete_list = state.list.filter((l, idx) =>{
+                if (idx !== action.dict){
+                    return l;
+                }
+            });
+            return { list: delete_list };
 
     
         default: 
